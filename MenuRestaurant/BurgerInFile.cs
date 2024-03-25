@@ -1,22 +1,23 @@
 ﻿namespace MenuRestaurant
 {
-      public class BurgerInFile:BurgerInMemory,IDish // tak trzeba zrobic
+      public class BurgerInFile:DishBase, IDish 
     {
         public override event GradeAddedDelegate GradeAdded;
         public char[] specialLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f' };
         public string[] specialGrades = { "+1", "1+", "-2", "2-", "+2", "2+", "-3", "3-", "+3", "3+", "-4", "4-", "+4", "4+", "-5", "5-", "+5", "5+", "-6", "6-" };
         private const string fileName = "_restaurant_grade.txt";
         private const string fileN = "restaurants.txt";
-        private string RestaurantN;
-        private string CityN;
-        private string fullfilename;
-        
+        public string RestaurantN;
+        public string CityN;
+        public string fullfilename;
+
         public BurgerInFile(string restaurantname, string city, string streetname, string dishname) : base(restaurantname, city, streetname, dishname)
         {
-            RestaurantN = $"{char.ToUpper(Restaurantname[0])}{Restaurantname.Substring(1, Restaurantname.Length - 1).ToLower()}";
-            CityN = $"{char.ToUpper(Cityname[0])}{Cityname.Substring(1, Cityname.Length - 1).ToLower()}";
-            fullfilename = $"{RestaurantN}_{CityN}{fileName}";
         }
+        public BurgerInFile()
+        {   
+        }
+
         public override string Restaurantname { get; set; }
         public override string Cityname { get; set; }
         public override string Streetname { get; set; }
@@ -25,6 +26,9 @@
         {
             if (grade >= 0 && grade <= 6)
             {
+                RestaurantN = $"{char.ToUpper(Restaurantname[0])}{Restaurantname.Substring(1, Restaurantname.Length - 1).ToLower()}";
+                CityN = $"{char.ToUpper(Cityname[0])}{Cityname.Substring(1, Cityname.Length - 1).ToLower()}";
+                fullfilename = $"{RestaurantN}_{CityN}{fileName}";
                 Console.Write("the value of grade is correct and is converted to float\n");
                 using (var writer = File.AppendText($"{fullfilename}"))
                 using (var writer2 = File.AppendText(fileN))

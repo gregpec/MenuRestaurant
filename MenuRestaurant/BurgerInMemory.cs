@@ -2,18 +2,20 @@
 {
     public class BurgerInMemory:DishBase,IDish
     {
+        public override event GradeAddedDelegate GradeAdded;
         private List<float> grades = new List<float>();
         public static char[] specialLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f' };
         public static string[] specialGrades = { "+1", "1+", "-2", "2-", "+2", "2+", "-3", "3-", "+3", "3+", "-4", "4-", "+4", "4+", "-5", "5-", "+5", "5+", "-6", "6-" };
         public BurgerInMemory(string restaurantname, string city, string streetname, string dishname) : base(restaurantname, city, streetname, dishname)
         {
         }
+        public BurgerInMemory() 
+        {
+        }
         public override string Restaurantname { get; set; }
         public override string Cityname { get; set; }
         public override string Streetname { get; set; }
-        public override string Dishname { get; set; }
-
-        public override event GradeAddedDelegate GradeAdded;
+        public override string Dishname { get; set; }    
         public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 6)

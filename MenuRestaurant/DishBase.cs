@@ -10,11 +10,15 @@
             this.Cityname = cityname;
             this.Streetname = streetname;
             this.Dishname = dishname;
-        }       
-        public virtual string Restaurantname { get;   set; }
-        public virtual string Cityname { get; set; }
-        public virtual string Streetname { get;  set; }
-        public virtual string Dishname { get; set; }
+        }
+        public DishBase()
+        {
+        }
+
+        public abstract string Restaurantname { get; set; }
+        public abstract string Cityname { get; set; }
+        public abstract string Streetname { get;  set; }
+        public abstract string Dishname { get;  set; }
         public abstract void AddGrade(float grade);
         public abstract void AddGrade(string grade);
         public abstract void AddGrade(int grade);

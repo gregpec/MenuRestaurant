@@ -1,11 +1,14 @@
-﻿namespace MenuRestaurant
+﻿using static MenuRestaurant.DishBase;
+
+namespace MenuRestaurant
 {
     public interface IDish
     {
-        string Restaurantname { get; }  
-        string Cityname { get; }
-        string Streetname { get; }
-        string Dishname { get; }
+        public abstract event GradeAddedDelegate GradeAdded;
+        public string Restaurantname { get; protected set; }  
+        string Cityname { get; protected set; }
+        string Streetname { get; protected set; }
+        string Dishname { get; protected set; }
         void AddGrade(float grade);
         void AddGrade(string grade);
         void AddGrade(int grade);
