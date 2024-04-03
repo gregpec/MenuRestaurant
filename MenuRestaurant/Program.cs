@@ -1,20 +1,18 @@
 ﻿using MenuRestaurant;
-using System;
 using System.Text.RegularExpressions;
-
-void RestaurantGradeAdded(object sender, EventArgs args) //delegat wprowadzenie oceny
+void RestaurantGradeAdded(object sender, EventArgs args) 
 {
     WritelineColor(ConsoleColor.Red, "New rating added!");
 }
-void EnterRestaurants(DishBase burger) //wprowadzenie danych 
+void EnterRestaurants(DishBase burger) 
 {
-    Regex regex = new Regex(@"^[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\-\._]+$"); //sprawdzenie poprawności nazw
+    Regex regex = new Regex(@"^[a-zA-Z0-9ąćęłńóśźżĄĆĘŁŃÓŚŹŻ\-\._]+$");
 
     do
     {
         Console.WriteLine("Please insert restaurant's name: ");
-        burger.Restaurantname = Console.ReadLine();
-        if (regex.IsMatch(burger.Restaurantname))
+        burger.RestaurantName = Console.ReadLine();
+        if (regex.IsMatch(burger.RestaurantName))
         {
 
 
@@ -24,13 +22,13 @@ void EnterRestaurants(DishBase burger) //wprowadzenie danych
         {
             Console.WriteLine("Name is not properly");
         }
-    } while (!regex.IsMatch(burger.Restaurantname));
+    } while (!regex.IsMatch(burger.RestaurantName));
 
     do
     {
         Console.WriteLine("Please insert restaurant's city: ");
-        burger.Cityname = Console.ReadLine();
-        if (regex.IsMatch(burger.Cityname))
+        burger.CityName = Console.ReadLine();
+        if (regex.IsMatch(burger.CityName))
         {
             Console.WriteLine("Name is properly!");
         }
@@ -38,13 +36,13 @@ void EnterRestaurants(DishBase burger) //wprowadzenie danych
         {
             Console.WriteLine("Name is not properly");
         }
-    } while (!regex.IsMatch(burger.Cityname));
+    } while (!regex.IsMatch(burger.CityName));
 
     do
     {
         Console.WriteLine("Please insert restaurant's street: ");
-        burger.Streetname = Console.ReadLine();
-        if (regex.IsMatch(burger.Streetname))
+        burger.StreetName = Console.ReadLine();
+        if (regex.IsMatch(burger.StreetName))
         {
             Console.WriteLine("Name is properly!");
         }
@@ -52,29 +50,29 @@ void EnterRestaurants(DishBase burger) //wprowadzenie danych
         {
             Console.WriteLine("Name is not properly");
         }
-    } while (!regex.IsMatch(burger.Streetname));
+    } while (!regex.IsMatch(burger.StreetName));
 
     do
     {
         Console.WriteLine("Please insert restaurant's dish: Enter = Burger ");
-        burger.Dishname = Console.ReadLine();
-        if (regex.IsMatch(burger.Dishname))
+        burger.DishName = Console.ReadLine();
+        if (regex.IsMatch(burger.DishName))
         {
             Console.WriteLine("Name is properly!");
         }
-        else if (burger.Dishname == "")
+        else if (burger.DishName == "")
         {
-            burger.Dishname = "Burger";
+            burger.DishName = "Burger";
         }
         else
         {
             Console.WriteLine("Name is not properly");
         }
-    } while (!regex.IsMatch(burger.Dishname));
+    } while (!regex.IsMatch(burger.DishName));
 
     InputGrades(burger);
 }
-void InputGrades(DishBase burger) //wprowadzenie ocen i obliczenie statystyk
+void InputGrades(DishBase burger) 
 {
     burger.GradeAdded += RestaurantGradeAdded; 
     while (true)
@@ -126,18 +124,17 @@ void InputGrades(DishBase burger) //wprowadzenie ocen i obliczenie statystyk
     }
     var statisticsForBurger = burger.GetStatistics();
     Console.WriteLine("======================================");
-    WritelineColor(ConsoleColor.Red, $"Restaurant named {burger.Restaurantname} in {burger.Cityname} on {burger.Streetname} street and Your dish is {burger.Dishname} and has grade: {statisticsForBurger.AverageLetter:N2}");
+    WritelineColor(ConsoleColor.Red, $"Restaurant named {burger.RestaurantName} in {burger.CityName} on {burger.StreetName} street and Your dish is {burger.DishName} and has grade: {statisticsForBurger.AverageLetter:N2}");
     Console.WriteLine($"Average: {statisticsForBurger.Average:N2}");
     Console.WriteLine($"Min: {statisticsForBurger.Min}");
     Console.WriteLine($"Max: {statisticsForBurger.Max}");
 }
-void EnterResturantsToMemory() //wprowadzenie danych do pamieci 
+void EnterResturantsToMemory() 
 {
     var burger = new BurgerInMemory();
     EnterRestaurants(burger);
 }
-
-void EnterResturantsToFile() //wprowadzenie danych do pliku
+void EnterResturantsToFile() 
 {
     var burger = new BurgerInFile();
     EnterRestaurants(burger);
@@ -155,7 +152,7 @@ void WritelineColor(ConsoleColor color, string text)
     }
 }
 
-Console.WriteLine("==================================================="); //program główny
+Console.WriteLine("==================================================="); 
 WritelineColor(ConsoleColor.Blue, "Welcome to The Restaurants Grades Diary console app");
 Console.WriteLine("===================================================");
 
